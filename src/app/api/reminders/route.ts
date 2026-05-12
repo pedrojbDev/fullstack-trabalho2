@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createReminderService, simulateSendReminderService } from "@/services/data";
+import {
+  createReminderService,
+  simulateSendReminderService,
+} from "@/modules/reminders/services";
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,4 +15,3 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: (e as Error).message }, { status: 400 });
   }
 }
-

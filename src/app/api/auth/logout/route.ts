@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { logoutService } from "@/modules/auth/services";
 
 export async function POST() {
-  const supabase = await createClient();
-  await supabase.auth.signOut();
+  await logoutService();
   return NextResponse.json({ success: true });
 }
-

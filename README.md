@@ -3,36 +3,82 @@
 Sistema acadêmico fullstack para gestão de agenda, clientes, espaços, bloqueios e lembretes.
 
 ## Objetivo
-Entregar um MVP funcional e apresentável para disciplina de Desenvolvimento FullStack.
+Entregar um MVP funcional e apresentável para disciplina de Desenvolvimento FullStack, organizado em **arquitetura de Monólito Modular** e com interface moderna inspirada em SaaS de referência (Linear, Vercel, Stripe).
 
 ## Stack
-- Next.js (App Router) + TypeScript
-- Tailwind CSS
+- Next.js 16 (App Router) + TypeScript
+- Tailwind CSS v4 (`@theme` em CSS) + Lucide React (ícones)
 - Supabase (PostgreSQL + Auth + RLS)
 - Zod + React Hook Form
 - FullCalendar
 
 ## Funcionalidades
-- Autenticação (login/signup)
-- Dashboard protegido
+- Autenticação (login/signup) em tela split-screen
+- Dashboard protegido com indicadores e próximos compromissos
 - CRUD de clientes
 - CRUD de espaços
-- CRUD de compromissos com status
+- CRUD de compromissos com status (com detecção de conflitos)
 - Bloqueio de horários
 - Calendário dia/semana/mês com cores por status
 - Lembretes simulados
 - Exportação para Google Agenda (link)
 - Configurações da agenda
 
-## Estrutura
-- `src/app`: páginas e APIs
-- `src/components`: componentes UI/layout
-- `src/lib`: supabase, validações, utilitários
-- `src/services`: regras de negócio
-- `src/types`: tipos do domínio
-- `supabase/migrations`: SQL de schema e RLS
-- `supabase/seed.sql`: dados iniciais
-- `docs/`: manual e entrega
+## Arquitetura — Monólito Modular
+
+O código é organizado por **domínio de negócio** (módulos) em vez de camadas técnicas. Cada módulo é autossuficiente — possui suas próprias regras, validações e tipos — e expõe apenas o necessário ao restante do app via seu arquivo `services.ts`.
+
+```
+src/
+├── app/                       # Camada de roteamento (Next.js App Router)
+│   ├── (app)/                 # Grupo de rotas protegidas (compartilha AppShell)
+│   │   ├── layout.tsx         # Guard de autenticação + AppShell
+│   │   ├── dashboard/
+│   │   ├── calendar/
+│   │   ├── appointments/
+│   │   ├── clients/
+│   │   ├── spaces/
+│   │   ├── blocked-times/
+│   │   ├── settings/
+│   │   └── integrations/
+│   ├── login/                 # Rotas públicas
+│   ├── signup/
+│   ├── api/                   # Endpoints REST (delegam para módulos)
+│   ├── page.tsx               # Landing page
+│   ├── layout.tsx             # Layout raiz
+│   └── globals.css            # Tailwind v4 @theme + design tokens
+│
+├── modules/                   # Módulos de negócio (núcleo do monólito modular)
+│   ├── auth/                  # Cada módulo expõe:
+│   ├── clients/               #   - services.ts   (regras de negócio)
+│   ├── spaces/                #   - validations.ts (Zod schemas)
+│   ├── appointments/          #   - types.ts       (tipos do domínio)
+│   ├── blocked-times/
+│   ├── reminders/
+│   ├── settings/
+│   └── _shared/               # Helpers entre módulos (ex.: sessão)
+│
+└── shared/                    # Infra & UI compartilhadas (cross-cutting)
+    ├── lib/
+    │   ├── supabase/          # Clientes server/browser
+    │   └── utils/             # cn(), status tokens
+    └── components/
+        ├── ui/                # Primitivos (Button, Input, Card, …)
+        ├── layout/            # AppShell, sidebar, topbar
+        └── dashboard/         # Widgets específicos
+```
+
+### Por que Monólito Modular?
+- **Coesão por domínio**: tudo de “clients” fica em `modules/clients`, facilitando manutenção.
+- **Acoplamento baixo**: módulos se comunicam só via `services`, sem importar entranhas uns dos outros.
+- **Evoluível**: cada módulo poderia, no futuro, ser extraído como microsserviço com baixa fricção.
+- **Camadas técnicas**: a camada `app/` cuida só de roteamento/UI, a camada `modules/` cuida do negócio, e `shared/` cuida de infra/UI reutilizável.
+
+## Design system
+- Cores: paleta `--color-brand-*` (indigo) definida em `globals.css` via `@theme`.
+- Tipografia: Inter (via `next/font/google`).
+- Componentes: Button, Input, Select, Textarea, Label, Card, Badge, StatusBadge, EmptyState, PageHeader.
+- Ícones: Lucide React em toda a UI.
 
 ## Variáveis de ambiente
 Copie `.env.example` para `.env.local` e configure:
@@ -71,4 +117,3 @@ Para OAuth real no futuro: criar app Google Cloud, implementar consent screen, c
 
 ## Entrega
 Ver `docs/ENTREGA.md` para checklist do ZIP.
-
