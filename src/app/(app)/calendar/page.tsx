@@ -5,10 +5,10 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { Card, CardContent } from "@/shared/components/ui/card";
-import { Select } from "@/shared/components/ui/select";
-import { PageHeader } from "@/shared/components/ui/page-header";
-import { statusHex, statusLabel } from "@/shared/lib/utils/status";
+import { Card, CardContent } from "@/frontend/components/ui/card";
+import { Select } from "@/frontend/components/ui/select";
+import { PageHeader } from "@/frontend/components/ui/page-header";
+import { statusHex, statusLabel } from "@/frontend/lib/utils/status";
 
 type Appt = {
   id: string;

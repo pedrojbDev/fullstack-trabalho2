@@ -12,12 +12,12 @@ import {
   Plus,
   Search,
 } from "lucide-react";
-import { StatusBadge } from "@/shared/components/ui/status-badge";
-import { Button } from "@/shared/components/ui/button";
-import { Input } from "@/shared/components/ui/input";
-import { Card } from "@/shared/components/ui/card";
-import { PageHeader } from "@/shared/components/ui/page-header";
-import { EmptyState } from "@/shared/components/ui/empty-state";
+import { StatusBadge } from "@/frontend/components/ui/status-badge";
+import { Button } from "@/frontend/components/ui/button";
+import { Input } from "@/frontend/components/ui/input";
+import { Card } from "@/frontend/components/ui/card";
+import { PageHeader } from "@/frontend/components/ui/page-header";
+import { EmptyState } from "@/frontend/components/ui/empty-state";
 
 type AppointmentItem = {
   id: string;

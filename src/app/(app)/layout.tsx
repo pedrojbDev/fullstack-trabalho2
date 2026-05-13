@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import { createClient } from "@/shared/lib/supabase/server";
-import { AppShell } from "@/shared/components/layout/app-shell";
+import { createClient } from "@/backend/lib/supabase/server";
+import { AppShell } from "@/frontend/components/layout/app-shell";
 
 export default async function ProtectedLayout({
   children,

@@ -4,7 +4,7 @@ import {
   createSpaceService,
   listSpaces,
   updateSpaceService,
-} from "@/modules/spaces/services";
+} from "@/backend/modules/spaces/services";
 
 export async function GET() {
   try {

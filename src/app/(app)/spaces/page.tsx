@@ -2,20 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { Archive, Building2, MapPin, Plus, Users } from "lucide-react";
-import { Button } from "@/shared/components/ui/button";
-import { Input } from "@/shared/components/ui/input";
-import { Label } from "@/shared/components/ui/label";
-import { Textarea } from "@/shared/components/ui/textarea";
+import { Button } from "@/frontend/components/ui/button";
+import { Input } from "@/frontend/components/ui/input";
+import { Label } from "@/frontend/components/ui/label";
+import { Textarea } from "@/frontend/components/ui/textarea";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/shared/components/ui/card";
-import { PageHeader } from "@/shared/components/ui/page-header";
-import { EmptyState } from "@/shared/components/ui/empty-state";
-import { Badge } from "@/shared/components/ui/badge";
+} from "@/frontend/components/ui/card";
+import { PageHeader } from "@/frontend/components/ui/page-header";
+import { EmptyState } from "@/frontend/components/ui/empty-state";
+import { Badge } from "@/frontend/components/ui/badge";
 
 type SpaceItem = {
   id: string;

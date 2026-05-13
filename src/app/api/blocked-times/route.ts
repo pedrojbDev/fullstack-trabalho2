@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   createBlockedTimeService,
   listBlockedTimes,
-} from "@/modules/blocked-times/services";
+} from "@/backend/modules/blocked-times/services";
 
 export async function GET() {
   try {

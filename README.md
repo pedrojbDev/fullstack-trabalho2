@@ -1,3 +1,8 @@
+# Pedro Bastista
+# Breno Sa
+# Pedro Pina
+# Kim Sameshima
+
 # AgendaFlow
 
 Sistema acadêmico fullstack para gestão de agenda, clientes, espaços, bloqueios e lembretes.
@@ -24,55 +29,59 @@ Entregar um MVP funcional e apresentável para disciplina de Desenvolvimento Ful
 - Exportação para Google Agenda (link)
 - Configurações da agenda
 
-## Arquitetura — Monólito Modular
+## Arquitetura — Frontend, Backend e App (Next.js)
 
-O código é organizado por **domínio de negócio** (módulos) em vez de camadas técnicas. Cada módulo é autossuficiente — possui suas próprias regras, validações e tipos — e expõe apenas o necessário ao restante do app via seu arquivo `services.ts`.
+O projeto separa claramente **frontend** (UI e cliente browser), **backend** (regras de negócio e Supabase server) e **`app/`** (roteamento Next.js + APIs HTTP). Continua sendo um **monólito modular**: o backend agrupa módulos por domínio; o frontend agrupa componentes e utilitários de interface.
+
+### Onde fica cada coisa
+
+| Pasta | Responsabilidade |
+|--------|------------------|
+| `src/frontend/` | Páginas importam daqui: componentes (`components/`), utilitários de UI (`lib/utils`), cliente Supabase **browser** (`lib/supabase/client.ts`). |
+| `src/backend/` | Serviços usados pelas rotas `app/api`: módulos de negócio (`modules/`), Supabase **server** (`lib/supabase/server.ts`), sessão compartilhada entre módulos. |
+| `src/app/` | Rotas (`page.tsx`, `layout.tsx`), `globals.css` e **adaptadores HTTP** em `app/api/*/route.ts` (finais; delegam para `src/backend`). |
 
 ```
 src/
-├── app/                       # Camada de roteamento (Next.js App Router)
-│   ├── (app)/                 # Grupo de rotas protegidas (compartilha AppShell)
-│   │   ├── layout.tsx         # Guard de autenticação + AppShell
-│   │   ├── dashboard/
-│   │   ├── calendar/
-│   │   ├── appointments/
-│   │   ├── clients/
-│   │   ├── spaces/
-│   │   ├── blocked-times/
-│   │   ├── settings/
-│   │   └── integrations/
-│   ├── login/                 # Rotas públicas
-│   ├── signup/
-│   ├── api/                   # Endpoints REST (delegam para módulos)
-│   ├── page.tsx               # Landing page
-│   ├── layout.tsx             # Layout raiz
-│   └── globals.css            # Tailwind v4 @theme + design tokens
+├── app/                          # Next.js App Router (roteamento + API)
+│   ├── (app)/                    # Rotas protegidas + layout com AppShell
+│   ├── login/  signup/  page.tsx
+│   ├── api/                      # Handlers HTTP → importam @/backend/modules/...
+│   ├── layout.tsx
+│   └── globals.css
 │
-├── modules/                   # Módulos de negócio (núcleo do monólito modular)
-│   ├── auth/                  # Cada módulo expõe:
-│   ├── clients/               #   - services.ts   (regras de negócio)
-│   ├── spaces/                #   - validations.ts (Zod schemas)
-│   ├── appointments/          #   - types.ts       (tipos do domínio)
-│   ├── blocked-times/
-│   ├── reminders/
-│   ├── settings/
-│   └── _shared/               # Helpers entre módulos (ex.: sessão)
+├── backend/                      # “Servidor” / domínio (não importar em "use client")
+│   ├── lib/supabase/server.ts    # createClient() com cookies (SSR / Route Handlers)
+│   └── modules/                  # Monólito modular por domínio
+│       ├── auth/
+│       ├── clients/
+│       ├── spaces/
+│       ├── appointments/
+│       ├── blocked-times/
+│       ├── reminders/
+│       ├── settings/
+│       └── _shared/session.ts    # getCurrentUserOrThrow()
 │
-└── shared/                    # Infra & UI compartilhadas (cross-cutting)
+└── frontend/                     # UI e código orientado ao browser
     ├── lib/
-    │   ├── supabase/          # Clientes server/browser
-    │   └── utils/             # cn(), status tokens
+    │   ├── supabase/client.ts    # createBrowserClient
+    │   └── utils/                # cn(), tokens de status para badges
     └── components/
-        ├── ui/                # Primitivos (Button, Input, Card, …)
-        ├── layout/            # AppShell, sidebar, topbar
-        └── dashboard/         # Widgets específicos
+        ├── ui/
+        ├── layout/               # AppShell
+        └── dashboard/
 ```
 
-### Por que Monólito Modular?
-- **Coesão por domínio**: tudo de “clients” fica em `modules/clients`, facilitando manutenção.
-- **Acoplamento baixo**: módulos se comunicam só via `services`, sem importar entranhas uns dos outros.
-- **Evoluível**: cada módulo poderia, no futuro, ser extraído como microsserviço com baixa fricção.
-- **Camadas técnicas**: a camada `app/` cuida só de roteamento/UI, a camada `modules/` cuida do negócio, e `shared/` cuida de infra/UI reutilizável.
+### Imports sugeridos
+
+- Do **frontend**: `@/frontend/components/...`, `@/frontend/lib/...`
+- Do **backend** (apenas em Server Components, `route.ts`, `middleware` se aplicável): `@/backend/modules/...`, `@/backend/lib/...`
+- **Evite** importar `src/backend` dentro de componentes com `"use client"` (acoplamento e risco de vazar código server).
+
+### Por que Monólito Modular no backend?
+- **Coesão por domínio**: tudo de “clients” fica em `backend/modules/clients`.
+- **Acoplamento baixo**: módulos expõem `services.ts`; o app só chama essas funções nas APIs.
+- **Evoluível**: os mesmos `services` podem virar chamadas a um servidor separado no futuro, trocando apenas a camada `app/api`.
 
 ## Design system
 - Cores: paleta `--color-brand-*` (indigo) definida em `globals.css` via `@theme`.

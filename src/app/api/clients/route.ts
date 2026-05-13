@@ -4,7 +4,7 @@ import {
   createClientService,
   listClients,
   updateClientService,
-} from "@/modules/clients/services";
+} from "@/backend/modules/clients/services";
 
 export async function GET() {
   try {

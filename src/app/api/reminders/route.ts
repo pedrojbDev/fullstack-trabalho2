@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   createReminderService,
   simulateSendReminderService,
-} from "@/modules/reminders/services";
+} from "@/backend/modules/reminders/services";
 
 export async function POST(request: NextRequest) {
   try {

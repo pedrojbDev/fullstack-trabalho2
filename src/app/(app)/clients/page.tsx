@@ -2,19 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { Archive, Mail, Phone, Plus, Search, Users } from "lucide-react";
-import { Button } from "@/shared/components/ui/button";
-import { Input } from "@/shared/components/ui/input";
-import { Label } from "@/shared/components/ui/label";
-import { Textarea } from "@/shared/components/ui/textarea";
+import { Button } from "@/frontend/components/ui/button";
+import { Input } from "@/frontend/components/ui/input";
+import { Label } from "@/frontend/components/ui/label";
+import { Textarea } from "@/frontend/components/ui/textarea";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/shared/components/ui/card";
-import { PageHeader } from "@/shared/components/ui/page-header";
-import { EmptyState } from "@/shared/components/ui/empty-state";
+} from "@/frontend/components/ui/card";
+import { PageHeader } from "@/frontend/components/ui/page-header";
+import { EmptyState } from "@/frontend/components/ui/empty-state";
 
 type ClientItem = {
   id: string;

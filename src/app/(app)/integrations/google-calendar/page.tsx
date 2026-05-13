@@ -5,9 +5,9 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/shared/components/ui/card";
-import { Badge } from "@/shared/components/ui/badge";
-import { PageHeader } from "@/shared/components/ui/page-header";
+} from "@/frontend/components/ui/card";
+import { Badge } from "@/frontend/components/ui/badge";
+import { PageHeader } from "@/frontend/components/ui/page-header";
 
 export default function GoogleIntegrationPage() {
   return (

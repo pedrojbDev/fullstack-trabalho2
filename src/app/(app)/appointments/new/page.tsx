@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, CalendarCheck2 } from "lucide-react";
-import { Button } from "@/shared/components/ui/button";
-import { Input } from "@/shared/components/ui/input";
-import { Label } from "@/shared/components/ui/label";
-import { Select } from "@/shared/components/ui/select";
-import { Textarea } from "@/shared/components/ui/textarea";
-import { Spinner } from "@/shared/components/ui/spinner";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/shared/components/ui/card";
+import { Button } from "@/frontend/components/ui/button";
+import { Input } from "@/frontend/components/ui/input";
+import { Label } from "@/frontend/components/ui/label";
+import { Select } from "@/frontend/components/ui/select";
+import { Textarea } from "@/frontend/components/ui/textarea";
+import { Spinner } from "@/frontend/components/ui/spinner";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/frontend/components/ui/card";
 
 type Option = { id: string; name: string; is_active?: boolean };
 

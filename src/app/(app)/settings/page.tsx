@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from "react";
 import { CheckCircle2, Settings as SettingsIcon } from "lucide-react";
-import { Button } from "@/shared/components/ui/button";
-import { Input } from "@/shared/components/ui/input";
-import { Label } from "@/shared/components/ui/label";
-import { Select } from "@/shared/components/ui/select";
+import { Button } from "@/frontend/components/ui/button";
+import { Input } from "@/frontend/components/ui/input";
+import { Label } from "@/frontend/components/ui/label";
+import { Select } from "@/frontend/components/ui/select";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/shared/components/ui/card";
-import { PageHeader } from "@/shared/components/ui/page-header";
+} from "@/frontend/components/ui/card";
+import { PageHeader } from "@/frontend/components/ui/page-header";
 
 export default function SettingsPage() {
   const [form, setForm] = useState({

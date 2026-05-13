@@ -10,7 +10,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@/frontend/components/ui/button";
 
 const features = [
   {

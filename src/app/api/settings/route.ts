@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   getAgendaSettings,
   updateAgendaSettingsService,
-} from "@/modules/settings/services";
+} from "@/backend/modules/settings/services";
 
 export async function GET() {
   try {

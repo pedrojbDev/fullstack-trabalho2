@@ -14,12 +14,12 @@ import {
   Users,
   Clock3,
 } from "lucide-react";
-import { SummaryCard } from "@/shared/components/dashboard/summary-card";
-import { StatusBadge } from "@/shared/components/ui/status-badge";
-import { Button } from "@/shared/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
-import { PageHeader } from "@/shared/components/ui/page-header";
-import { EmptyState } from "@/shared/components/ui/empty-state";
+import { SummaryCard } from "@/frontend/components/dashboard/summary-card";
+import { StatusBadge } from "@/frontend/components/ui/status-badge";
+import { Button } from "@/frontend/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/frontend/components/ui/card";
+import { PageHeader } from "@/frontend/components/ui/page-header";
+import { EmptyState } from "@/frontend/components/ui/empty-state";
 
 type Appointment = {
   id: string;

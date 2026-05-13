@@ -4,7 +4,7 @@ import {
   listAppointments,
   updateAppointmentService,
   updateAppointmentStatus,
-} from "@/modules/appointments/services";
+} from "@/backend/modules/appointments/services";
 
 export async function GET() {
   try {

@@ -2,19 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { Clock3, Plus, ShieldAlert } from "lucide-react";
-import { Button } from "@/shared/components/ui/button";
-import { Input } from "@/shared/components/ui/input";
-import { Label } from "@/shared/components/ui/label";
-import { Select } from "@/shared/components/ui/select";
+import { Button } from "@/frontend/components/ui/button";
+import { Input } from "@/frontend/components/ui/input";
+import { Label } from "@/frontend/components/ui/label";
+import { Select } from "@/frontend/components/ui/select";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/shared/components/ui/card";
-import { PageHeader } from "@/shared/components/ui/page-header";
-import { EmptyState } from "@/shared/components/ui/empty-state";
+} from "@/frontend/components/ui/card";
+import { PageHeader } from "@/frontend/components/ui/page-header";
+import { EmptyState } from "@/frontend/components/ui/empty-state";
 
 type SpaceOption = { id: string; name: string };
 type BlockedItem = {
