@@ -3,6 +3,8 @@
 # Pedro Pina
 # Kim Sameshima
 
+# Link Vercel : https://fullstack-trabalho2.vercel.app/
+
 # AgendaFlow
 
 Sistema acadêmico fullstack para gestão de agenda, clientes, espaços, bloqueios e lembretes.
